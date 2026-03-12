@@ -1,1 +1,1 @@
-tugas mata kuliah pemrograman web semester 2 disuru bikin kalkulator
+tugas mata kuliah pemrograman web semester 2 bikin kalkulator
