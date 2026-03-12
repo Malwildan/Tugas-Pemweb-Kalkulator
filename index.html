@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- <style>
+    #display {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      font-size: 24px;
+    }
+  </style> -->
+</head>
+<body>
+    <center>
+    <b>Kalkulator</b>
+    <!-- <label id="display"></label> -->
+
+  
+  <table border="1">
+    <tr>
+        <td colspan="4"><label id="display"></label></td>
+    </tr>
+    <tr>
+      <td><button onclick="clearDisplay()">C</button></td>
+      <td><button onclick="deleteChar()">D</button></td>
+      <td><button onclick="setOperation('/')">/</button></td>
+      <td><button onclick="setOperation('*')">*</button></td>
+    </tr>
+    <tr>
+      <td><button onclick="setNumber(7)">7</button></td>
+      <td><button onclick="setNumber(8)">8</button></td>
+      <td><button onclick="setNumber(9)">9</button></td>
+      <td><button onclick="setOperation('-')">-</button></td>
+    </tr>
+    <tr>
+      <td><button onclick="setNumber(4)">4</button></td>
+      <td><button onclick="setNumber(5)">5</button></td>
+      <td><button onclick="setNumber(6)">6</button></td>
+      <td><button onclick="setOperation('+')">+</button></td>
+    </tr>
+    <tr>
+      <td><button onclick="setNumber(1)">1</button></td>
+      <td><button onclick="setNumber(2)">2</button></td>
+      <td><button onclick="setNumber(3)">3</button></td>
+      <td rowspan="2"><button onclick="calculate()">=</button></td>
+    </tr>
+    <tr>
+      <td><button onclick="setNumber(0)">0</button></td>
+      <td><button onclick="setDecimal()">.</button></td>
+      <td><button onclick="setOperation('%')">%</button></td>
+    </tr>
+  </table>
+  Copyright by Akmal Wildan - 2026
+  </center>
+
+  <script>
+    let display = document.getElementById('display');
+    let currentNumber = '';
+    let previousNumber = '';
+    let operation = '';
+
+    function setNumber(num) {
+      currentNumber += num;
+      display.innerText = previousNumber + operation + currentNumber;
+    }
+
+    function setOperation(op) {
+      previousNumber = currentNumber;
+      operation = op;
+      currentNumber = '';
+      display.innerText = previousNumber + op + currentNumber;
+    }
+
+    function calculate() {
+      let result;
+      switch (operation) {
+        case '+':
+          result = parseFloat(previousNumber) + parseFloat(currentNumber);
+          break;
+        case '-':
+          result = parseFloat(previousNumber) - parseFloat(currentNumber);
+          break;
+        case '*':
+          result = parseFloat(previousNumber) * parseFloat(currentNumber);
+          break;
+        case '/':
+          result = parseFloat(previousNumber) / parseFloat(currentNumber);
+          break;
+      }
+      display.innerText = result;
+      currentNumber = result;
+      previousNumber = '';
+      operation = '';
+    }
+
+    function clearDisplay() {
+      display.innerText = '';
+      currentNumber = '';
+      previousNumber = '';
+      operation = '';
+    }
+
+    function deleteChar() {
+      if (currentNumber !== '') {
+        currentNumber = currentNumber.slice(0, -1);
+      } else if (operation !== '') {
+        operation = '';
+        currentNumber = previousNumber;
+        previousNumber = '';
+      }
+      display.innerText = previousNumber + operation + currentNumber;
+    }
+
+    function setDecimal() {
+      if (!currentNumber.includes('.')) {
+        currentNumber += '.';
+        display.innerText = previousNumber + operation + currentNumber;
+      }
+    }
+  </script>
+</body>
+</html>
